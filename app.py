@@ -34,12 +34,15 @@ def webhook():
             for messaging_event in entry["messaging"]:
 
                 if messaging_event.get("message"):  # someone sent us a message
+				
+					curl -X GET "https://graph.facebook.com/v2.6/<USER_ID>?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=PAGE_ACCESS_TOKEN"
+					
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, "Nothin' much, you?  Sadly, cos I'm super lame")
+                    send_message(sender_id, "Nothin' much, you?  Sadly, cos I'm super lame," first_name)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
